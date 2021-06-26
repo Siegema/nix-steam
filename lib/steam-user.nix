@@ -1,1 +1,1 @@
-{ username, password, useGuardFiles ? true, cachedFileDir }
+{ username, password, useGuardFiles, cachedFileDir }
