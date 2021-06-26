@@ -1,38 +1,10 @@
-with import <nixpkgs> {};
-
+{ system ? builtins.currentSystem }:
 let
-  game = "Antichamber";
-  appId = "219890";
-  launchFile = "Binaries/Linux/UDKGame-Linux";
-  username = "juliosueiras";
-  password = "";
-  steamFilesDir = ./steamFiles;
-
-  gameFiles = stdenv.mkDerivation {
-    name = game;
-
-    unpackPhase = "true";
-
-    buildPhase = ''
-      export HOME=$PWD
-      mkdir -p $HOME/.steam/steam
-      cp -r ${steamFilesDir}/* $HOME/.steam/steam
-      steamcmd +login ${username} ${password} +force_install_dir $PWD/game +app_update ${appId} validate +exit
-      rm -r game/steamapps
-      rm game/steam_appid.txt || true
-    '';
-
-    installPhase = ''
-      mkdir -p $out
-      cp -a game/* $out
-    '';
-
-    outputHashAlgo = "sha256";
-    outputHashMode = "recursive";
-    outputHash = "33d5450cd967e267722b39a660a1d6074235722da7adbdef2cf3f4a8f023c273";
+ flake-compat = builtins.fetchurl {
+    url = "https://raw.githubusercontent.com/edolstra/flake-compat/99f1c2157fba4bfe6211a321fd0ee43199025dbf/default.nix";
+    sha256 = "1vas5z58901gavy5d53n1ima482yvly405jp9l8g07nr4abmzsyb";
   };
-in writeScriptBin game ''
-  export SteamAppId=${appId}
-  export HOME=/tmp/steam-test
-  ${steam-run}/bin/steam-run ${gameFiles}/${launchFile}
-''
+in import flake-compat {
+  src = ./.;
+  inherit system;
+}
