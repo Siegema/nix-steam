@@ -13,7 +13,7 @@ makeSteamGame {
     appId = "1580130";
     depotId = "1580131";
     manifestId = "7336486418625335787";
-    hash = "gXNkjsxMLeCp0aHA3PbwqRo/xW8eTd30gj1SqRxfNiE=";
+    hash = "jMU0ZzwGQ3OXFA0hwup7osF2W9URGxMXENcqny/WEY4=";
 
     extraAction = ''
       chmod +x game/proton

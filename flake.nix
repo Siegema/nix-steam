@@ -33,6 +33,7 @@
           pkgs.ripgrep
           pkgs.steamcmd
           pkgs.depotdownloader
+          pkgs.protontricks
         ];
       };
     });

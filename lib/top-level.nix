@@ -12,7 +12,10 @@ rec {
     mkdir -p $HOME/{protons/${proton.name},.proton,games/${game.name}}
     ${steamcmd}/bin/steamcmd +exit
     ${lndir}/bin/lndir ${gameFiles} $HOME/games/${game.name}
-    ${lndir}/bin/lndir ${proton} $HOME/protons/${proton.name}
+    cp -L -r ${proton}/* $HOME/protons/${proton.name}
+    chmod +x $HOME/protons/${proton.name}/proton
+
+    export PROTON_HOME=$HOME/protons/${proton.name}
 
     ${lib.optionalString steamUserInfo.useGuardFiles ''
     cp -r ${steamUserInfo.cachedFileDir}/* $HOME/.steam/steam
