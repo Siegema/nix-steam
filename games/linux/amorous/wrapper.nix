@@ -11,7 +11,7 @@ writeScriptBin game.name ''
   cp -L ${gameFiles}/Amorous.Game.Unix.bin.x86_64 $HOME/games/${game.name}/Amorous.Game.Unix.bin.x86_64
 
   ${if enableAdult then ''
-    touch ShowMeSomeBooty.txt $HOME/games/${game.name}
+    touch $HOME/games/${game.name}/ShowMeSomeBooty.txt 
   '' else ''
     rm $HOME/games/${game.name}/ShowMeSomeBooty.txt
   ''}

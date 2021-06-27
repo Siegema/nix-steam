@@ -1,8 +1,9 @@
-{ callPackage, steamGameFetcher, lib, symlinkJoin }:
+{ callPackage, steamGameFetcher, lib, symlinkJoin, protonWrapperScript, runCommand }:
 
 { steamUserInfo, game, gameFiles, drvPath, proton ? null }:
+
 callPackage drvPath {
-  inherit game steamUserInfo proton;
+  inherit game steamUserInfo proton protonWrapperScript;
   gameFiles = if !(lib.isList gameFiles) then steamGameFetcher {
     inherit steamUserInfo;
     game = gameFiles;
