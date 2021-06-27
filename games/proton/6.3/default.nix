@@ -15,10 +15,8 @@ makeSteamGame {
     manifestId = "7336486418625335787";
     hash = "gXNkjsxMLeCp0aHA3PbwqRo/xW8eTd30gj1SqRxfNiE=";
 
-    installPhase = ''
-        mkdir -p $out
-        cp -a game/* $out
-        chmod +x $out/proton
+    extraAction = ''
+      chmod +x game/proton
     '';
   };
 

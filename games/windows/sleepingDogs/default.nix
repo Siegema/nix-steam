@@ -9,23 +9,23 @@ makeSteamGame {
   };
 
   gameFiles = [
-    (gameFileInfo {
-      name = "SleepingDogs-Exec";
-      platform = "windows";
-      appId = "307690";
-      depotId = "307693	";
-      manifestId = "521771309705279162";
-      hash = "TzEVvvpTs0B14hrfYJZN3y/9MzQtTKoYUMX7Yu5I/bE=";
-    })
-
-    (gameFileInfo {
-      name = "SleepingDogs-UI";
-      platform = "windows";
-      appId = "307690";
-      depotId = "307692";
-      manifestId = "8969342104525223947";
-      hash = "";
-    })
+#    (gameFileInfo {
+#      name = "SleepingDogs-Exec";
+#      platform = "windows";
+#      appId = "307690";
+#      depotId = "307693	";
+#      manifestId = "521771309705279162";
+#      hash = "";
+#    })
+#
+#    (gameFileInfo {
+#      name = "SleepingDogs-UI";
+#      platform = "windows";
+#      appId = "307690";
+#      depotId = "307692";
+#      manifestId = "8969342104525223947";
+#      hash = "";
+#    })
 
     (gameFileInfo {
       name = "SleepingDogs-Content";

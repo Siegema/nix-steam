@@ -9,8 +9,10 @@ writeScriptBin game.name ''
   chmod -R +rw $HOME/games/${game.name}
   unlink $HOME/games/${game.name}/Amorous.Game.Unix.bin.x86_64
   unlink $HOME/games/${game.name}/Amorous.Game.Unix
+  unlink $HOME/games/${game.name}/FNA.dll
   cp -L ${gameFiles}/Amorous.Game.Unix $HOME/games/${game.name}/Amorous.Game.Unix
   cp -L ${gameFiles}/Amorous.Game.Unix.bin.x86_64 $HOME/games/${game.name}/Amorous.Game.Unix.bin.x86_64
+  cp -L ${gameFiles}/FNA.dll $HOME/games/${game.name}/
   chmod +x $HOME/games/${game.name}/Amorous.Game.Unix*
 
   ${if enableAdult then ''
