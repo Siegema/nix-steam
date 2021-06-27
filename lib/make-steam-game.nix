@@ -1,19 +1,19 @@
-{ callPackage, steamGameFetcher, lib, symlinkJoin, protonWrapperScript, runCommand }:
+{ callPackage, steamGameFetcher, lib, symlinkJoin, protonWrapperScript, linkFarm, runCommand }:
 
 { steamUserInfo, game, gameFiles, drvPath, proton ? null }:
 
 callPackage drvPath {
   inherit game steamUserInfo proton protonWrapperScript;
-  gameFiles = if !(lib.isList gameFiles) then steamGameFetcher {
+  gameFiles = if !(lib.isList gameFiles) then linkFarm "${gameFiles.name}-linkfarm" (builtins.fromJSON (builtins.readFile "${steamGameFetcher {
     inherit steamUserInfo;
     game = gameFiles;
-  } else symlinkJoin {
+  }}/paths.json")) else symlinkJoin {
     name = "${game.name}-files";
 
     paths = lib.forEach gameFiles (gameFile:
-    steamGameFetcher {
+    (linkFarm "${gameFile.name}-linkfarm" (builtins.fromJSON (builtins.readFile("${steamGameFetcher {
       inherit steamUserInfo;
       game = gameFile;
-    });
+    }}/paths.json")))));
   };
 }

@@ -6,12 +6,15 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, nix }:
   flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
   let
     pkgs = import nixpkgs {
       inherit system;
-      config = { allowUnfree = true; };
+      config = { 
+        allowUnfree = true;
+        allowBroken = true;
+      };
     };
   in {
     helperLib = pkgs.callPackage ./lib/top-level.nix {};

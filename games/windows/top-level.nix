@@ -7,4 +7,5 @@ let
 in {
   SonicGenerations = import ./sonicGenerations normalList;
   JustCause = import ./justCause normalList;
+  SleepingDogs = import ./sleepingDogs normalList;
 }

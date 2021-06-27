@@ -14,12 +14,10 @@ makeSteamGame {
       appId = "778700";
       depotId = "778704";
       manifestId = "1910947975998266938";
-      hash = "bgMK4ookHvywLLier2SbXJtUILz+MnnkwfrzPhXCi7E=";
+      hash = "Z1QvxH5rHMf40tP2v08SeMs3lbTVTWRETZ8Gr+u7RYo=";
 
-      installPhase = ''
-        mkdir -p $out
-        cp -a game/* $out
-        chmod +x $out/*.bin*
+      extraAction = ''
+        chmod +x game/*.bin*
       '';
     })
 
@@ -28,7 +26,7 @@ makeSteamGame {
       appId = "778700";
       depotId = "778701";
       manifestId = "9201582490132012031";
-      hash = "pKcl7Fqq9JHuEF6pHwJvNzx9O+mpeT7/hlBHZzaCJ1o=";
+      hash = "LQPuw+aFzizBJbESj9LYNXl33TCk5ig9+qMsaTEiHw8=";
     })
   ];
 
