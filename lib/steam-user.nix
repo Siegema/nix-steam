@@ -1,1 +1,1 @@
-{ username, password, useGuardFiles, cachedFileDir }
+{ username, password, useGuardFiles, cachedFileDir, depotdownloaderStorage }

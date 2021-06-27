@@ -3,6 +3,7 @@
 # Make sure you run it in a directory with no files
 writeScriptBin game.name ''
   export SteamAppId=${game.appId}
+  export HOME=/tmp/steam-test
   ${steamcmd}/bin/steamcmd +exit
 
   ${lib.optionalString steamUserInfo.useGuardFiles ''
@@ -14,6 +15,6 @@ writeScriptBin game.name ''
   ${steam-run}/bin/steam-run ${writeScript "fix-${game.name}" ''
     export LD_LIBRARY_PATH=${gameFiles}/Binaries/Linux/lib:$LD_LIBRARY_PATH
     cd ${gameFiles}/Binaries/Linux
-    ./UDKGame-Linux
+    exec ./UDKGame-Linux
   ''}
 ''

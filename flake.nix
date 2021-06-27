@@ -2,7 +2,7 @@
   description = "Nix-Steam, a nix system for steam games";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/1f91fd1040667e9265a760b0347f8bc416249da7";
+    nixpkgs.url = "github:nixos/nixpkgs/3b6c3bee9174dfe56fd0e586449457467abe7116";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -28,6 +28,8 @@
           pkgs.arion
           pkgs.nixfmt
           pkgs.ripgrep
+          pkgs.steamcmd
+          pkgs.depotdownloader
         ];
       };
     });

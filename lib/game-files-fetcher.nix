@@ -1,35 +1,31 @@
-{ stdenv, lib, steamcmd, ...  }:
+{ stdenv, lib, cacert, depotdownloader, ...  }:
 
-{ game, steamUserInfo, hash, ... } @ args:
+{ game, steamUserInfo, ... }:
 
 stdenv.mkDerivation {
   name = "${game.name}-src";
 
+  installPhase = game.installPhase;
+
   unpackPhase = "true";
 
   buildInputs = [
-    steamcmd
+    cacert
+    depotdownloader
   ];
 
   buildPhase = ''
     export HOME=$PWD
-    mkdir -p $HOME/.steam/steam
+    mkdir -p $HOME/.local/share/IsolatedStorage
+    cp -r ${steamUserInfo.depotdownloaderStorage}/* $HOME/.local/share/IsolatedStorage/
+    chmod -R +rw $HOME/.local/share/IsolatedStorage/
 
-    ${lib.optionalString steamUserInfo.useGuardFiles ''
-    cp -r ${steamUserInfo.cachedFileDir}/* $HOME/.steam/steam
-    ''}
-
-    steamcmd +@sSteamCmdForcePlatformType ${game.platform} +login ${steamUserInfo.username} ${steamUserInfo.password} +force_install_dir $PWD/game +app_update ${game.appId} validate +exit
-    rm -r game/steamapps
-    rm game/steam_appid.txt || true
+    depotdownloader -os ${game.platform} -username ${steamUserInfo.username} -password ${steamUserInfo.password} -dir $PWD/game -app ${game.appId} -depot ${game.depotId} -manifest ${game.manifestId}
+    rm -r game/.DepotDownloader
   '';
 
-  installPhase = args.installPhase or ''
-    mkdir -p $out
-    cp -a game/* $out
-  '';
-
+  dontMoveLib64 = true;
   outputHashAlgo = "sha256";
   outputHashMode = "recursive";
-  outputHash = hash;
+  outputHash = game.hash;
 }
