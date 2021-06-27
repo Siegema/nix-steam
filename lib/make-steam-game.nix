@@ -1,8 +1,8 @@
 { callPackage, steamGameFetcher, lib, symlinkJoin }:
 
-{ steamUserInfo, game, gameFiles, drvPath }:
+{ steamUserInfo, game, gameFiles, drvPath, proton ? null }:
 callPackage drvPath {
-  inherit game steamUserInfo;
+  inherit game steamUserInfo proton;
   gameFiles = if !(lib.isList gameFiles) then steamGameFetcher {
     inherit steamUserInfo;
     game = gameFiles;

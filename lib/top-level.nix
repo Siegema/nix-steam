@@ -6,7 +6,7 @@ rec {
   gameFileInfo = import ./game-file-info.nix;
   steamGameFetcher = callPackage ./game-files-fetcher.nix {};
 
-  makeLinuxSteamGame = callPackage ./make-linux-steam-game.nix {
+  makeSteamGame = callPackage ./make-steam-game.nix {
     inherit steamGameFetcher callPackage;
   };
 }

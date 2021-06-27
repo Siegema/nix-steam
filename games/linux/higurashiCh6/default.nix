@@ -1,6 +1,6 @@
-{ makeLinuxSteamGame, steamUserInfo, gameInfo, gameFileInfo }:
+{ makeSteamGame, steamUserInfo, gameInfo, gameFileInfo }:
 
-makeLinuxSteamGame {
+makeSteamGame {
   inherit steamUserInfo;
 
   game = gameInfo {
