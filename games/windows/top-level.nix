@@ -9,4 +9,5 @@ in {
   JustCause = import ./justCause normalList;
   SleepingDogs = import ./sleepingDogs normalList;
   RocketLeague = import ./rocketLeague normalList;
+  Warframe = import ./warframe normalList;
 }
