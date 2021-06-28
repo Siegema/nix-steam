@@ -2,7 +2,7 @@
 
 ## What is Nix-Steam
 
-nix-steam is a nix repo that contain steam games in both linux and windows(via proton) to be install and run declaratively in linux distros(both nixos, and non-nixos)
+nix-steam is a nix repo that contains steam games in both Linux and Windows(via proton) to be install and run declaratively in Linux distros(both nixos, and non-nixos)
 
 **It is experimental and constant improvement will be happening**
 
@@ -61,7 +61,7 @@ in (defaultNix.makeSteamStore.x86_64-linux {
 })
 ```
 
-## Adding a Game(linux/windows)
+## Adding a Game(Linux/Windows)
 
 ### Step 1: SteamDB is your friend
 
@@ -91,7 +91,7 @@ makeSteamGame {
 
   drvPath = ./wrapper.nix;
 
-  # proton = proton.<version> # This option is only for windows game
+  # proton = proton.<version> # This option is only for Windows game
 }
 ```
 
@@ -124,7 +124,7 @@ makeSteamGame {
       depotId = "1289314";
       manifestId = "8723838119065609357";
       hash = "";
-      # platform = "windows"; # This option is only for windows game
+      # platform = "windows"; # This option is only for Windows game
     })
 
     (gameFileInfo {
@@ -133,12 +133,12 @@ makeSteamGame {
       depotId = "1289315";
       manifestId = "6394422377711576735";
       hash = "";
-      # platform = "windows"; # This option is only for windows game
+      # platform = "windows"; # This option is only for Windows game
     })
   ];
 
   drvPath = ./wrapper.nix;
-  # proton = proton.<version> # This option is only for windows game
+  # proton = proton.<version> # This option is only for Windows game
 }
 ```
 

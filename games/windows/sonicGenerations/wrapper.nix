@@ -1,4 +1,4 @@
-{ game, proton, lib, steamcmd, steam, writeText, steam-run, writeScript, writeScriptBin, gameFiles, lndir, steamUserInfo, ... }:
+{ game, proton, lib, steamcmd, steam, writeText, steam-run, writeScript, writeScriptBin, gameFiles, lndir, steamUserInfo, protonWrapperScript, ... }:
 
 let
   sonicReg = writeText "sonic-generation.reg" ''
