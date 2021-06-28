@@ -12,23 +12,23 @@ rec {
     mkdir -p $HOME/{protons/${proton.name},.proton,games/${game.name}}
     ${steamcmd}/bin/steamcmd +exit
     ${lndir}/bin/lndir ${gameFiles} $HOME/games/${game.name}
+    chmod -R +rw $HOME/games/${game.name}
     cp -L -r ${proton}/* $HOME/protons/${proton.name}
     chmod +x $HOME/protons/${proton.name}/proton
 
     export PROTON_HOME=$HOME/protons/${proton.name}
 
     ${lib.optionalString steamUserInfo.useGuardFiles ''
-    cp -r ${steamUserInfo.cachedFileDir}/* $HOME/.steam/steam
+      cp -r ${steamUserInfo.cachedFileDir}/* $HOME/.steam/steam
     ''}
-
-    chmod -R +rw $HOME/.steam
-    ${steamcmd}/bin/steamcmd +login ${steamUserInfo.username} ${steamUserInfo.password} +exit
 
     STEAM_RUNNING="$(pgrep steam -c)"
 
     if [[ $STEAM_RUNNING == 0 ]]; then
+      chmod -R +rw $HOME/.steam
+      ${steamcmd}/bin/steamcmd +login ${steamUserInfo.username} ${steamUserInfo.password} +exit
       (${steam}/bin/steam -silent -login ${steamUserInfo.username} ${steamUserInfo.password} &)
-      sleep 30
+      sleep 60
     fi
   '';
 
