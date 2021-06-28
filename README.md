@@ -150,7 +150,7 @@ run it with `nix-build --max-jobs 1`, once it finish, fill it in, rerun it(it wi
 
 to end up with this
 
-```
+```nix
 { makeSteamGame, steamUserInfo, gameInfo, gameFileInfo }:
 
 makeSteamGame {
