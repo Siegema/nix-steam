@@ -18,11 +18,13 @@ runCommand "${game.name}-links" {
   ];
 } ''
     export HOME=$PWD
-    mkdir -p $HOME/.local/share/IsolatedStorage
-    cp -r ${steamUserInfo.depotdownloaderStorage}/* $HOME/.local/share/IsolatedStorage/
-    chmod -R +rw $HOME/.local/share/IsolatedStorage/
+    ${lib.optionalString steamUserInfo.useGuardFiles ''
+      mkdir -p $HOME/.local/share/IsolatedStorage
+      cp -r ${steamUserInfo.depotdownloaderStorage}/* $HOME/.local/share/IsolatedStorage/
+      chmod -R +rw $HOME/.local/share/IsolatedStorage/
+    ''}
 
-    depotdownloader -os ${game.platform} -username ${steamUserInfo.username} -password ${steamUserInfo.password} -dir $PWD/game -app ${game.appId} -depot ${game.depotId} -manifest ${game.manifestId}
+    depotdownloader -os ${game.platform} -username ${steamUserInfo.username} -password ${steamUserInfo.password} -dir $PWD/game -app ${game.appId} -depot ${game.depotId} -manifest ${game.manifestId} -max-downloads 20
     rm -r game/.DepotDownloader
 
     ${game.extraAction}
@@ -30,7 +32,7 @@ runCommand "${game.name}-links" {
     mkdir -p $out
     cd game
 
-    find * -type f -exec bash -c 'echo "{ \"name\": \"{}\", \"path\": \"$(file="{}"; nix store add-file --name $(basename "{}" | sed "s/[^a-zA-Z]*//g") "$file")\" }"' \; >> $out/paths.json
+    find * -type f -exec echo "Adding {} to store" \;  -exec bash -c 'echo "{ \"name\": \"{}\", \"path\": \"$(file="{}"; nix store add-file --name $(basename "{}" | sed "s/[^a-zA-Z]*//g") "$file")\" }"  >> $out/paths.json' \;
     cat $out/paths.json | jq -s '.' > temp
     mv temp $out/paths.json
 ''
