@@ -8,16 +8,16 @@ nix-steam is a nix repo that contains steam games in both Linux and Windows(via 
 
 ## Requirements
 
-- it need to support cgroup due to steam-run
+- it needs to support cgroup due to steam-run
 
-- it need the `ca-derivation` and `recursive-nix` features of your nix configuration
+- it needs the `ca-derivation` and `recursive-nix` features of your nix configuration
 
 
 ## Logging in for Steam
 
 ### No SteamGuard
 
-without steamguard is pretty straightforward
+without steamguard it's pretty straightforward
 
 ```nix
 let 
@@ -65,15 +65,15 @@ in (defaultNix.makeSteamStore.x86_64-linux {
 
 ### Step 1: SteamDB is your friend
 
-Steam game are made from single/multiple depots, this normally happen in the background for both normal steam download and steamcmd +app_update command, however since we want locking, we have to construct the games ourself.
+Steam games are made from single/multiple depots, this normally happens in the background for both normal steam downloads and steamcmd +app_update command, however, since we want locking, we have to construct the games ourself.
 
 #### Find info of game and depot
 
 we will use [Helltaker](https://steamdb.info/app/1289310) as a example
 
-first we need to find out what depots it have, which can be found under the [Depots](https://steamdb.info/app/1289310/depots/) section, we see there are two depots that we need(logically), `Helltaker Content Linux` and `Helltaker Local`.
+first we need to find out what depots it has, which can be found under the [Depots](https://steamdb.info/app/1289310/depots/) section, where there are two depots that we need(logically), `Helltaker Content Linux` and `Helltaker Local`.
 
-we will have the following the template
+we will have the following template
 
 ```nix
 { makeSteamGame, steamUserInfo, gameInfo, gameFileInfo }:
@@ -97,7 +97,7 @@ makeSteamGame {
 
 #### Construct Depots
 
-the `gameFiles` param accept either a list or a single entry, for games with a singular or multiple depots
+the `gameFiles` param accepts either a list or a single entry for games with a singular or multiple depots
 
 now lets construct with depots
 
@@ -146,7 +146,7 @@ makeSteamGame {
 
 now we are ready to get the hashes
 
-run it with `nix-build --max-jobs 1`, once it finish, fill it in, rerun it(it will trigger another build to make it content addressed)
+run it with `nix-build --max-jobs 1`, once it's finished, fill it in, rerun it(it will trigger another build to make it content addressed)
 
 to end up with this
 
@@ -185,9 +185,9 @@ makeSteamGame {
 
 ### Step 2: Wrapper time
 
-for most games the wrapper following a similar template of these
+for most games, the wrapper follows a similar template to these
 
-the information about launcher can be found under [Configuration](https://steamdb.info/app/1289310/config/) section
+the information about the launcher can be found under the [Configuration](https://steamdb.info/app/1289310/config/) section
 
 #### Linux Games
 
@@ -245,7 +245,7 @@ writeScriptBin game.name ''
 ''
 ```
 
-Of course, you can do anything you want in the wrapper for game-specific fixes or feature setting
+Of course, you can do anything you want in the wrapper for game-specific fixes or feature settings
 
 ### Step 3: Add it to packages list
 
@@ -253,12 +253,12 @@ Lastly, make sure you have the new game under the platform's top-level.nix
 
 ## Caveats
 
-- due to a bug/issue(not sure what is causing it), it will require double build for the hash getting process(not the actual game building/installing part)
+- due to a bug/issue(not sure what is causing it), it will require a double build for the hash getting process(not the actual game building/installing part)
 
-- right now the password is plaintext in the running process, hopefully there will be a improvement via read file or other method
+- right now the password is plaintext in the running process, hopefully, there will be an improvement via read file or other methods
 
-- some games, especially multiplayer/mmo games require double space due to those games do checking for updates against the assets which won't be possible via symlink
+- some games, especially multiplayer/mmo games require double space due to those games checking for updates against the assets which won't be possible via symlink
 
-- right now the target folder for is at /tmp/steam-test this will become a param later on
+- right now, the target folder for temp directory, to put the games linkage, and steam running pipe is at /tmp/steam-test this, becomes a param later on
 
-- due to steam restriction, it need to be run with --max-jobs 1
+- due to steam restrictions, it needs to be run with --max-jobs 1
