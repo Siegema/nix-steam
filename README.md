@@ -2,7 +2,7 @@
 
 ## What is Nix-Steam
 
-nix-steam is a nix repo that contains steam games in both Linux and Windows(via proton) to be install and run declaratively in Linux distros(both nixos, and non-nixos)
+nix-steam is a nix repo that contains steam games in both Linux and Windows(via proton) to install and run declaratively in Linux distros(both nixos, and non-nixos)
 
 **It is experimental and constant improvement will be happening**
 
